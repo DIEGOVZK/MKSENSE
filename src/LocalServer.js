@@ -12,7 +12,7 @@ import http from 'http';
 export default class LocalServer {
 
     // Membros da classe
-    _jsonBuffer = [];
+    _jsonBuffer = "";
     port;
 
     // Inicializa o identificador de classes
@@ -46,7 +46,7 @@ export default class LocalServer {
     open() {
 
         // Variável para armazenar pacote recebido
-        var _bodyBuffer = "default";
+        var _bodyBuffer = [];
 
         // Cria objeto Server usando bib http
         const app = http.createServer();
@@ -74,6 +74,9 @@ export default class LocalServer {
                     process.stdout.write(`\rRecebeu ${_bodyBuffer.length}` + 
                                          " chars no port " + this.port);
 
+                    // Reseta o  buffer para a próxima execução
+                    _bodyBuffer = [];
+
                 // Captura erro em caso do JSON não esteja formatado
                 } catch (error) {
                     process.stdout.write("Erro ao montar JSON no port: " +
@@ -82,7 +85,7 @@ export default class LocalServer {
             });
 
             // Responde 200 OK
-            res.end(200);
+            res.end('200');
         });
 
         // Inicia servidor e 'escuta' nas portas especificadas
