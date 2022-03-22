@@ -62,7 +62,7 @@ export default class LocalServer {
             // Ao fim da transmissão, contatena tudo e converte...
             req.on("end", () => {
 
-                try {
+                try { // Tenta traduzir JSON file
 
                     // Converte buffer para String e Json object
                     _bodyBuffer = Buffer.concat(_bodyBuffer).toString();
@@ -74,6 +74,7 @@ export default class LocalServer {
                     process.stdout.write(`\rRecebeu ${_bodyBuffer.length}` + 
                                          " chars no port " + this.port);
 
+                // Captura erro em caso do JSON não esteja formatado
                 } catch (error) {
                     process.stdout.write("Erro ao montar JSON no port: " +
                         this.port + " ERRO: " + error + "\n");
