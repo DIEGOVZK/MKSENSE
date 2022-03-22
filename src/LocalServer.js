@@ -69,11 +69,14 @@ export default class LocalServer {
                     this._jsonBuffer = JSON.parse(_bodyBuffer);
 
                     // Mostra os dados recebidos na tela
-                    console.log(`\rRecebeu ${_bodyBuffer.length}` + " chars no port " + this.port);
+                    process.stdout.clearLine(0);
+                    process.stdout.cursorTo(0);
+                    process.stdout.write(`\rRecebeu ${_bodyBuffer.length}` + 
+                                         " chars no port " + this.port);
 
                 } catch (error) {
-                    console.log("Erro ao montar JSON no port: " +
-                        this.port + " ERRO: " + error);
+                    process.stdout.write("Erro ao montar JSON no port: " +
+                        this.port + " ERRO: " + error + "\n");
                 }
             });
 
@@ -82,7 +85,7 @@ export default class LocalServer {
         });
 
         // Inicia servidor e 'escuta' nas portas especificadas
-        console.log(`Server started on port: ${this.port}`);
+        process.stdout.write(`Server started on port: ${this.port} \n`);
         app.listen(this.port);
     }
 }
