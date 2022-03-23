@@ -71,16 +71,18 @@ export default class LocalServer {
                     // Mostra os dados recebidos na tela
                     process.stdout.clearLine(0);
                     process.stdout.cursorTo(0);
-                    process.stdout.write(`\rRecebeu ${_bodyBuffer.length}` + 
-                                         " chars no port " + this.port);
+                    process.stdout.write(`\x1B[32m Recebeu ${_bodyBuffer.length}` +
+                        " chars no port " + this.port);
 
                     // Reseta o  buffer para a próxima execução
                     _bodyBuffer = [];
 
-                // Captura erro em caso do JSON não esteja formatado
+                    // Captura erro em caso do JSON não esteja formatado
                 } catch (error) {
-                    process.stdout.write("Erro ao montar JSON no port: " +
-                        this.port + " ERRO: " + error + "\n");
+                    process.stdout.clearLine(0);
+                    process.stdout.cursorTo(0);
+                    process.stdout.write("\x1B[31m Erro ao montar JSON no port: " +
+                        this.port);
                 }
             });
 

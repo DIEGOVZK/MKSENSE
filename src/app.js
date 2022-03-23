@@ -1,18 +1,17 @@
-// Importa as classes dos pacotes escritos
+// Importa as classes dos pacotes desenvolvidos
 import LocalServer from "./LocalServer.js";
 
 // Limpa console
 process.stdout.write("\n");
 
 // Cria objetos que instanciam servidores locais
-var server_1 = new LocalServer(80); 
-// var server_2 = new LocalServer(); 
-// var server_3 = new LocalServer(); 
+var serNum = [10, 20, 30, 40, 50, 60, 70, 80, 90, 120];
 
-// Inicialisa os servidores criados
-server_1.open();
-// server_2.open();
-// server_3.open();
+// Instancia os servidores indicados
+var server = [];
+serNum.forEach(element => {
+    server.push(new LocalServer(element).open());
+});
 
 // Limpa console
 process.stdout.write("\n");
