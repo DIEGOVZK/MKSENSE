@@ -55,22 +55,40 @@ export default class LocalServer {
         // No evento de requisição HTTP
         app.on("request", (req, res) => {
 
-            // No recebimento junta as chuncks no _bodyBuffer
-            req.on("data", (bodyData) => {
-                _bodyBuffer.push(bodyData);
-            });
+            // Tenta traduzir JSON file ou contatenar o pacote
+            try {
 
-            // Ao fim da transmissão, contatena tudo e converte...
-            req.on("end", () => {
+                // No recebimento junta as chuncks no _bodyBuffer
+                req.on("data", (bodyData) => {
 
-                try { // Tenta traduzir JSON file
+                    _bodyBuffer.push(bodyData);
+
+                });
+
+                // Captura erro em caso do JSON não esteja formatado ou em falha ao concatenar os dados
+            } catch (error) {
+                process.stdout.clearLine(0);
+                process.stdout.cursorTo(0);
+                process.stdout.write("\x1B[31m Erro ao receber pacote no port: " +
+                    this.port);
+            }
+
+            try {
+
+                // Ao fim da transmissão, contatena tudo e converte...
+                req.on("end", () => {
 
                     // Converte buffer para String e Json object
                     _bodyBuffer = Buffer.concat(_bodyBuffer).toString();
-                    this._jsonBuffer = JSON.parse(_bodyBuffer);
+                    try {
+                        this._jsonBuffer = JSON.parse(_bodyBuffer);
 
-                    // TODO: Alterar para interação com o banco de dados
-                    fs.appendFile('SensorialData.csv', (this.port + ", " + _bodyBuffer) + '\n',
+                    } catch (error) {
+
+                    }
+
+                    // TODO: IMPLEMENTAR interação com o banco de dados SEM REMOVER:
+                    fs.appendFile('SensorialData_PORT_' + this.port + '.csv', (_bodyBuffer) + '\n',
                         function (err) {
                             if (err) {
                                 process.stdout.write("\x1B[31m Erro ao salvar dados do port: " +
@@ -86,15 +104,15 @@ export default class LocalServer {
 
                     // Reseta o  buffer para a próxima execução
                     _bodyBuffer = [];
+                });
 
-                    // Captura erro em caso do JSON não esteja formatado
-                } catch (error) {
-                    process.stdout.clearLine(0);
-                    process.stdout.cursorTo(0);
-                    process.stdout.write("\x1B[31m Erro ao montar JSON no port: " +
-                        this.port);
-                }
-            });
+                // Captura erro em caso do JSON não esteja formatado ou em falha ao concatenar os dados
+            } catch (error) {
+                process.stdout.clearLine(0);
+                process.stdout.cursorTo(0);
+                process.stdout.write("\x1B[31m Erro ao montar pacote no port: " +
+                    this.port);
+            }
 
             // Responde 200 OK
             res.end('200');
@@ -103,5 +121,6 @@ export default class LocalServer {
         // Inicia servidor e 'escuta' nas portas especificadas
         process.stdout.write(`Server started on port: ${this.port} \n`);
         app.listen(this.port);
+        
     }
 }

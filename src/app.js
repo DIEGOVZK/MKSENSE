@@ -5,7 +5,7 @@ import LocalServer from "./LocalServer.js";
 process.stdout.write("\n");
 
 // Cria objetos que instanciam servidores locais
-var serNum = [10, 20, 30, 40, 50, 60, 70, 80, 90];
+var serNum = [10, 20, 30, 140, 50, 160, 70, 80, 90, 100];
 
 // Instancia os servidores indicados
 var server = [];
