@@ -87,8 +87,8 @@ export default class LocalServer {
 
                     }
 
-                    // TODO: IMPLEMENTAR interação com o banco de dados SEM REMOVER:
-                    fs.appendFile('SensorialData_PORT_' + this.port + '.csv', (_bodyBuffer) + '\n',
+                    // Salva os dados em uma pasta Local contatenando dados de um mesmo PORT
+                    fs.appendFile("./sensorData/sensorData" + this.port + '.csv', (_bodyBuffer) + '\n',
                         function (err) {
                             if (err) {
                                 process.stdout.write("\x1B[31m Erro ao salvar dados do port: " +

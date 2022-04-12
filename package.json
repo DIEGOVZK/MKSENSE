@@ -1,6 +1,6 @@
 {
     "name": "mksense",
-    "description": "description",
+    "description": "MKSENSE - Sistema de gerenciamento IoT para telemetria de dados sensoriais de subsistemas conectados.",
     "authors": "Diego Anestor Coutinho",
     "version": "0.0.1",
     "main": "./src/app.js",

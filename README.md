@@ -1,6 +1,6 @@
 # MKSENSE
 
-MKSENSE é um sistema de gerenciamento IoT para telemetria de dados sensoriais de subsistemas conectados.  O sistema faz uso da conectividade WiFi e protocolos `HTTP` e `TCP` para transporte de dados. MKSENSE também é capaz de armazenar os dados coletados e fazer gerenciamento de banco de dados.
+MKSENSE é um sistema de gerenciamento IoT para telemetria remota de dados sensoriais de subsistemas conectados.  O sistema faz uso da conectividade WiFi e protocolos `HTTP` e `TCP` para transporte de dados. MKSENSE também é capaz de armazenar os dados coletados e fazer gerenciamento de banco de dados.
 
 ### Descrição dos arquivos:
 ```
