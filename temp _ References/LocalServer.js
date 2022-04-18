@@ -1,4 +1,4 @@
-// Dependências - http, 
+// Dependências - http, fs
 import http from 'http';
 import fs from 'fs';
 
@@ -15,9 +15,6 @@ export default class LocalServer {
     // Membros da classe
     _jsonBuffer = "";
     port;
-
-    // Inicializa o identificador de classes
-    static _identifier = 0;
 
     // Construtor da classe LocalServer
     constructor(port) {

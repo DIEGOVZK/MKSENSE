@@ -4,6 +4,9 @@
     "authors": "Diego Anestor Coutinho",
     "version": "0.0.1",
     "main": "./src/app.js",
-    "dependencies": {"http": "0.0.1-security"},
+    "dependencies": {
+        "http": "0.0.1-security",
+        "mysql": "^2.18.1"
+    },
     "type": "module"
 }
