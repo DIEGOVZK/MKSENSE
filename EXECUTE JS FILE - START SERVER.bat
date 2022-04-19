@@ -23,5 +23,5 @@ for /f "usebackq tokens=*" %%a in (`ipconfig ^| findstr IPv4`) do (
 endlocal
 
 
-node "./src/app.js"
+node "./build/app.js"
 pause
