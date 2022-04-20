@@ -46,7 +46,7 @@ export default class LocalServer {
             this.ip = socket.remoteAddress;
 
             // Mostra a mensagem de nova conexão
-            this.ui.mostrarNovaConexao(this.ip + " conectado na porta: ", this.porta);
+            this.ui.mostrarNovaConexao(this.ip, this.porta);
 
         });
 
@@ -78,7 +78,7 @@ export default class LocalServer {
                         fsInstance.escreverArquivo(_bodyString, this.porta);
                     
                         // Mostra a mensagem de status que recebeu um pacote
-                        this.ui.mostrarStatus("recebeu um pacote {" + _bodyString.length + "} na porta: ", this.porta);
+                        this.ui.mostrarStatus("recebeu um pacote {" + _bodyString.length + "}", this.porta);
                         
                     }
                 });
@@ -90,11 +90,11 @@ export default class LocalServer {
                 if (error instanceof SyntaxError)
                     
                     // Mostra a mensagem de erro de sintaxe
-                    this.ui.mostrarErro("erro de sintaxe", this.porta);
+                    this.ui.mostrarErro(" sintaxe", this.porta);
 
                 else 
                     // Mostra mensagem de erro de recebimento de pacote
-                    this.ui.mostrarErro("erro de recebimento de pacote", this.porta);
+                    this.ui.mostrarErro(" pacote", this.porta);
             }
 
             // Servidor responde com 200 OK

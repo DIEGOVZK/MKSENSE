@@ -3,9 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const UI_DataBase_1 = __importDefault(require("./UI_DataBase"));
+const FileSystem_1 = __importDefault(require("./FileSystem"));
 const http_1 = __importDefault(require("http"));
 class LocalServer {
     constructor(porta) {
+        this.ui = new UI_DataBase_1.default();
         this._jsonBuffer = "";
         this.porta = 0;
         if (!arguments.length) {
@@ -20,7 +23,7 @@ class LocalServer {
         const app = http_1.default.createServer();
         app.on('connection', (socket) => {
             this.ip = socket.remoteAddress;
-            console.log(this.ip);
+            this.ui.mostrarNovaConexao(this.ip, this.porta);
         });
         app.on('request', (req, res) => {
             try {
@@ -29,15 +32,19 @@ class LocalServer {
                 });
                 req.on('end', () => {
                     var _bodyString = Buffer.concat(_body).toString();
-                    if (_bodyString.length > 0)
+                    if (_bodyString.length > 0) {
                         this._jsonBuffer = JSON.parse(_bodyString);
+                        const fsInstance = FileSystem_1.default.getInstance();
+                        fsInstance.escreverArquivo(_bodyString, this.porta);
+                        this.ui.mostrarStatus("recebeu um pacote {" + _bodyString.length + "}", this.porta);
+                    }
                 });
             }
             catch (error) {
                 if (error instanceof SyntaxError)
-                    console.log("Erro de sintaxe");
+                    this.ui.mostrarErro(" sintaxe", this.porta);
                 else
-                    console.log("Erro desconhecido");
+                    this.ui.mostrarErro(" pacote", this.porta);
             }
             res.end('200');
         });

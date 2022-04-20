@@ -16,12 +16,12 @@ export default class UI_DataBase implements UI {
 
         process.stdout.clearLine(0);
         process.stdout.cursorTo(0);
-        process.stdout.write("\x1B[32m Status " + mensagem + " no port: " + porta);
+        process.stdout.write("\x1B[32m " + mensagem + " no port: " + porta);
 
     }
 
     // Implementa o método mostrarNovaConexao da interface UI
-    mostrarNovaConexao(mensagem: string, porta: any): void {
+    mostrarNovaConexao(mensagem: string | undefined, porta: any): void {
 
         process.stdout.clearLine(0);
         process.stdout.cursorTo(0);

@@ -1,5 +1,7 @@
 @echo off
 
+mode 120,20
+
 setlocal
 setlocal enabledelayedexpansion
 rem throw away everything except the IPv4 address line 
