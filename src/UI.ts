@@ -1,4 +1,4 @@
-interface UI {
+export default interface UI {
 
     // Método para mostrar a mensagem de erro
     mostrarErro(mensagem: string, porta: any): void;

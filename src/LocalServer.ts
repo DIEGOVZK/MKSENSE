@@ -1,4 +1,5 @@
 // Inclui as dependências > http
+import UI_DataBase from './UI_DataBase';
 import FileSystem from './FileSystem';
 import http from 'http';
 
@@ -6,10 +7,11 @@ import http from 'http';
 export default class LocalServer {
 
     // Membros da classe e identificador
-    protected ip: string | undefined;
+    private ui: UI_DataBase = new UI_DataBase();
     public static identificador = 0;
+    private ip: string | undefined;
     protected _jsonBuffer = "";
-    protected porta = 0;
+    private porta = 0;
 
     // Construtor da classe LocalServer
     constructor(porta: number) {
@@ -43,7 +45,8 @@ export default class LocalServer {
             // Armazena o endereço IP do cliente
             this.ip = socket.remoteAddress;
 
-            // TODO: UTILIZAR UI PARA MOSTRAR NOVA CONEXÃO
+            // Mostra a mensagem de nova conexão
+            this.ui.mostrarNovaConexao(this.ip + " conectado na porta: ", this.porta);
 
         });
 
@@ -74,7 +77,9 @@ export default class LocalServer {
                         const fsInstance = FileSystem.getInstance();
                         fsInstance.escreverArquivo(_bodyString, this.porta);
                     
-                        // TODO: USAR UI PARA MOSTRAR QUE UM NOVO PACOTE FOI RECEBIDO
+                        // Mostra a mensagem de status que recebeu um pacote
+                        this.ui.mostrarStatus("recebeu um pacote {" + _bodyString.length + "} na porta: ", this.porta);
+                        
                     }
                 });
             }
@@ -83,12 +88,13 @@ export default class LocalServer {
             catch (error) {
 
                 if (error instanceof SyntaxError)
-                    // TODO: USAR A CLASSE UI PARA MOSTRAR A MENSAGEM DE ERRO
-                    console.log("Erro de sintaxe");
-                else
-                    // TODO: USAR A CLASSE UI PARA MOSTRAR A MENSAGEM DE ERRO
-                    console.log("Erro desconhecido");
+                    
+                    // Mostra a mensagem de erro de sintaxe
+                    this.ui.mostrarErro("erro de sintaxe", this.porta);
 
+                else 
+                    // Mostra mensagem de erro de recebimento de pacote
+                    this.ui.mostrarErro("erro de recebimento de pacote", this.porta);
             }
 
             // Servidor responde com 200 OK
