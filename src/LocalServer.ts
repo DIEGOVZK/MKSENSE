@@ -1,5 +1,5 @@
 // Inclui as dependências > http
-import UI_DataBase from './UI_DataBase';
+import UI_Server from './UI_Server';
 import FileSystem from './FileSystem';
 import http from 'http';
 
@@ -7,7 +7,7 @@ import http from 'http';
 export default class LocalServer {
 
     // Membros da classe e identificador
-    private ui: UI_DataBase = new UI_DataBase();
+    private ui: UI_Server = new UI_Server();
     public static identificador = 0;
     private ip: string | undefined;
     protected _jsonBuffer = "";
