@@ -24,12 +24,12 @@ def low_pass_filter(vect_wot, alpha):
 
 # EXECUÇÃO PRINCIPAL ------------------------------------------
 
-for port in range(10, 5000, 10):
+for port in range(0, 65353, 1):
 
     # Importa a converte os arquivos CSV
     try:
-        wot = pd.read_csv(r'C206\Algoritmos - LAB\MKSENSE\SensorialData_PORT_' + repr(port) + '.csv')
-        wot = pd.DataFrame(wot, columns=['pre'])
+        wot = pd.read_csv(r'sensorData\SensorialData_PORT_' + repr(port) + '.csv')
+        wot = pd.DataFrame(wot, columns=['temp'])
     
     except:
         continue
@@ -41,7 +41,7 @@ for port in range(10, 5000, 10):
     vect_wot = np.array([])
 
     # Converte a coluna em uma lista de floats das altitudes
-    for x in wot['pre'].tail(1000):
+    for x in wot['temp'].tail(1000):
         vect_wot = np.append(vect_wot, float(x))
 
     # Aplica o filtro
@@ -56,5 +56,5 @@ for port in range(10, 5000, 10):
     # Amostragem dos vetores R e C da imagem
     plt.legend()
     plt.ylabel("Altitude")
-    plt.savefig(r"C206\Algoritmos - LAB\MKSENSE\images\fig_" + repr(port) + ".png")
+    plt.savefig(r"images\fig_" + repr(port) + ".png")
     plt.close()
