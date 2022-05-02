@@ -87,7 +87,7 @@ Arquivo onde todas as classes e funções do projeto são escritas. Todos os arq
 
 ## Instalação do MKSENSE
 
-É necessário que você tenha instalado uma versão 16.15.0 ou mais recente do Node.js: https://nodejs.org/. Depois, no diretório raiz do projeto, execute o arquivo `npm install` para instalar todos os pacotes necessários. Se tudo ocorreu bem, execute o arquivo `EXECUTE JS FILE - START SERVER.bat` para iniciar o servidor. Caso precise alterar as configurações, antes de iniciar o servidor reconstrua o projeto usando o arquivo `BUILD JS FILE FROM TS FILE.bat`.
+É necessário que você tenha instalado uma versão 16.15.0 ou mais recente do Node.js: https://nodejs.org/. Depois, no diretório raiz do projeto, execute o comando `npm install` para instalar todos os pacotes necessários. Se tudo ocorreu bem, execute o arquivo `EXECUTE JS FILE - START SERVER.bat` para iniciar o servidor. Caso precise alterar as configurações, antes de iniciar o servidor reconstrua o projeto usando o arquivo `BUILD JS FILE FROM TS FILE.bat`.
 
 ```
 ```
@@ -106,10 +106,10 @@ Arquivo onde todas as classes e funções do projeto são escritas. Todos os arq
 ```
 ```
 
-## Galeria de usos do MKSENSE
+## Galeria do MKSENSE
 
 ### > TinySat
-O projeto MKSENSE foi utilizado para a aplicação de um curso de instrodução a sistemas satelitais para cerca de 25 alunos da ETE. Lá os 9 grupos constríram um sistema de telemetria para o satelite, que envia os dados por uma rede IoT a um servidor local MKSENSE, que gerencia os dados sensoriais coletados e os armazena em um banco de dados. Depois são gerados gráficos dos dados, que podem ser analizados para tirar conclusões das missões realizadas com os pequenos satélites educacionais.
+O projeto MKSENSE foi utilizado para a aplicação de um curso de instrodução a sistemas satelitais para cerca de 25 alunos da ETE. Lá os 9 grupos construíram um sistema de telemetria para o satelite, que envia os dados por uma rede IoT a um servidor local MKSENSE, que gerencia os dados sensoriais coletados e os armazena em um banco de dados. Depois são gerados gráficos dos dados, que podem ser analizados para tirar conclusões das missões realizadas com os pequenos satélites educacionais.
 
 Essa missão confirmou o funcionamento da primeira versão do projeto MKSENSE.
 
