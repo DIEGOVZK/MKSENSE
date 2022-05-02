@@ -3,12 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const UI_DataBase_1 = __importDefault(require("./UI_DataBase"));
+const UI_Server_1 = __importDefault(require("./UI_Server"));
 const FileSystem_1 = __importDefault(require("./FileSystem"));
 const http_1 = __importDefault(require("http"));
 class LocalServer {
     constructor(porta) {
-        this.ui = new UI_DataBase_1.default();
+        this.ui = new UI_Server_1.default();
         this._jsonBuffer = "";
         this.porta = 0;
         if (!arguments.length) {
