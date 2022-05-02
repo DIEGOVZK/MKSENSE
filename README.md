@@ -94,3 +94,13 @@ Arquivo onde todas as classes e funções do projeto são escritas. Todos os arq
 # Utilização do MKSENSE - User
 
 # Galeria de usos do MKSENSE
+
+### TinySat
+O projeto MKSENSE foi utilizado para a aplicação de um curso de instrodução a sistemas satelitais para cerca de 25 alunos da ETE. Lá os 9 grupos constríram um sistema de telemetria para o satelite, que envia os dados por uma rede IoT a um servidor local MKSENSE, que gerencia os dados sensoriais coletados e os armazena em um banco de dados. Depois são gerados gráficos dos dados, que podem ser analizados para tirar conclusões das missões realizadas com os pequenos satélites educacionais.
+
+Essa missão confirmou o funcionamento da primeira versão do projeto MKSENSE.
+
+<p float="left">
+  <img style="background-color:#FFFFFF" src="https://github.com/DIEGOVZK/MKSENSE/blob/main/media/TinySat%20V1.jpeg" width="49%">
+  <img style="background-color:#FFFFFF" src="https://github.com/DIEGOVZK/MKSENSE/blob/main/media/gp%20TinySat%20V1.jpeg" width="49%">
+</p>
