@@ -34,18 +34,18 @@ MKSENSE
 │   │   ...
 │   
 └─── src
-    │   UI.ts
-    │   app.ts
-    │   DBA.ts
-    │   UI_Server.ts
-    │   DBA_Users.ts
-    │   FileSystem.ts
-    │   DBA_Manager.ts
+    │   DataBase_Connection.ts
+    │   Client_Master.ts
     │   Client_User.ts
     │   LocalServer.ts
+    │   DBA_Manager.ts
+    │   FileSystem.ts
     │   UI_DataBase.ts
-    │   Client_Master.ts
-    │   DataBase_Connection.ts
+    │   UI_Server.ts
+    │   DBA_Users.ts
+    │   DBA.ts
+    │   app.ts
+    │   UI.ts
 ```
 
 ```
