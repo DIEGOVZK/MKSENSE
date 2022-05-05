@@ -3,8 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const UI_Server_1 = __importDefault(require("./UI_Server"));
 const FileSystem_1 = __importDefault(require("./FileSystem"));
+const UI_Server_1 = __importDefault(require("./UI_Server"));
 const http_1 = __importDefault(require("http"));
 class LocalServer {
     constructor(porta) {
@@ -33,12 +33,18 @@ class LocalServer {
                 req.on('end', () => {
                     var _bodyString = Buffer.concat(_body).toString();
                     if (_bodyString.length > 0) {
-                        this._jsonBuffer = JSON.parse(_bodyString);
+                        try {
+                            this._jsonBuffer = JSON.parse(_bodyString);
+                        }
+                        catch (error) {
+                            this.ui.mostrarErro("JSON parse ", this.porta);
+                        }
                         const fsInstance = FileSystem_1.default.getInstance();
                         fsInstance.escreverArquivo(_bodyString, this.porta);
                         this.ui.mostrarStatus("recebeu um pacote {" + _bodyString.length + "}", this.porta);
                     }
                 });
+                _body = [];
             }
             catch (error) {
                 if (error instanceof SyntaxError)

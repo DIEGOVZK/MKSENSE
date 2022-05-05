@@ -109,7 +109,7 @@ Arquivo onde todas as classes e funções do projeto são escritas. Todos os arq
 ## Galeria do MKSENSE
 
 ### > TinySat
-O projeto MKSENSE foi utilizado para a aplicação de um curso de instrodução a sistemas satelitais para cerca de 25 alunos da ETE. Lá os 9 grupos construíram um sistema de telemetria para o satelite, que envia os dados por uma rede IoT a um servidor local MKSENSE, que gerencia os dados sensoriais coletados e os armazena em um banco de dados. Depois são gerados gráficos dos dados, que podem ser analizados para tirar conclusões das missões realizadas com os pequenos satélites educacionais.
+O projeto MKSENSE foi utilizado para a aplicação de um curso de introdução a sistemas satelitais para cerca de 25 alunos da ETE. Lá os 9 grupos construíram um sistema de telemetria para o satelite, que envia os dados por uma rede IoT a um servidor local MKSENSE, que gerencia os dados sensoriais coletados e os armazena em um banco de dados. Depois são gerados gráficos dos dados, que podem ser analizados para tirar conclusões das missões realizadas com os pequenos satélites educacionais.
 
 Essa missão confirmou o funcionamento da primeira versão do projeto MKSENSE.
 
