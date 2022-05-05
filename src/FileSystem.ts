@@ -16,7 +16,6 @@ export default class FileSystem {
 
             // Retorna nova instância da classe FileSystem
             FileSystem.instance = new FileSystem();
-        
         }
 
         // Retorna a instância existente da classe FileSystem
@@ -27,7 +26,7 @@ export default class FileSystem {
     escreverArquivo(dados: any, porta: number) {
 
         // Importa os novos dados para o arquivo, cria novo arquivo se não existe
-        fs.appendFile("./sensorData/sensorData" + porta + '.csv', (dados) + '\n',
+        fs.appendFile("./sensorData/SensorialData_PORT_" + porta + '.csv', (dados) + '\n',
             function (err) {
                 if (err) {
                     process.stdout.write("\x1B[31m Erro ao salvar dados do port: " +

@@ -57,6 +57,22 @@ export default class DataBase_Connection {
 
     }
 
+    // Método para executar uma query no banco de dados
+    executarQuery(query: string) {
+
+        // Executa a query
+        this.connection.query(query, (err: any, result: any) => {
+            
+            // Em caso de erro trows um erro
+            if (err) { throw err; }
+
+            // Em caso de sucesso, retorna o resultado
+            return result;
+                
+        });
+
+    }
+
     // Método para desconectar do servidor MySQL
     desconectar() {
 

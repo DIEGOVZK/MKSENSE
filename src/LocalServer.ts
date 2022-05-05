@@ -1,6 +1,6 @@
 // Inclui as dependências > http
-import UI_Server from './UI_Server';
 import FileSystem from './FileSystem';
+import UI_Server from './UI_Server';
 import http from 'http';
 
 // Definição da classe LocalServer
@@ -70,29 +70,41 @@ export default class LocalServer {
                     // Converte o JSON em objeto
                     if (_bodyString.length > 0) {
 
-                        // Transcreve a string para objeto JSON
-                        this._jsonBuffer = JSON.parse(_bodyString);
+                        try {
+
+                            // Transcreve a string para objeto JSON
+                            this._jsonBuffer = JSON.parse(_bodyString);
+
+                        } catch (error) {
+
+                            // Mostra mensagem de erro
+                            this.ui.mostrarErro("JSON parse ", this.porta);
+
+                        }
 
                         // Salva os dados via sistema de arquivos
                         const fsInstance = FileSystem.getInstance();
                         fsInstance.escreverArquivo(_bodyString, this.porta);
-                    
+
                         // Mostra a mensagem de status que recebeu um pacote
                         this.ui.mostrarStatus("recebeu um pacote {" + _bodyString.length + "}", this.porta);
-                        
+
                     }
                 });
+
+                // Limpa o buffer
+                _body = [];
             }
 
             // Caso ocorra erro, verifica o tipo do erro e mostra mensagem
             catch (error) {
 
                 if (error instanceof SyntaxError)
-                    
+
                     // Mostra a mensagem de erro de sintaxe
                     this.ui.mostrarErro(" sintaxe", this.porta);
 
-                else 
+                else
                     // Mostra mensagem de erro de recebimento de pacote
                     this.ui.mostrarErro(" pacote", this.porta);
             }
