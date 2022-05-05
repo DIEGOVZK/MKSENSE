@@ -4,9 +4,10 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import sys
 
 
-# Funções -------------------------------------------------------
+# FUNÇÕES -------------------------------------------------------
 
 # Function that takes a list of number and aplies a low pass filter to smooth the data
 def low_pass_filter(vect_wot, alpha):
@@ -22,9 +23,24 @@ def low_pass_filter(vect_wot, alpha):
     # Retorna o vetor filtrado
     return vect_wot_filtered
 
+# UI simples para mostrar o progresso do teste
+def progress(count, total, count2, total2):
+    bar_len = 60
+    filled_len = int(round(bar_len * count / float(total)))
+
+    percents = round(100.0 * count / float(total), 1)
+    bar = '#' * filled_len + '·' * (bar_len - filled_len)
+
+    sys.stdout.write("\033[1;32;40m[%s] %s%s ... %s/%s\033[0;37;40m             \r" %
+                     (bar, percents, '%', count2, total2))
+    sys.stdout.flush()
+
 # EXECUÇÃO PRINCIPAL ------------------------------------------
 
 for port in range(0, 65353, 1):
+
+    # Mostra o progresso da execução
+    progress(port, 65353, port, 65353)
 
     # Importa a converte os arquivos CSV
     try:
@@ -58,3 +74,7 @@ for port in range(0, 65353, 1):
     plt.ylabel("Altitude")
     plt.savefig(r"images\fig_" + repr(port) + ".png")
     plt.close()
+
+# Limpa a tela
+sys.stdout.write("\033[0;37;40m                                                             \
+                                                                                            ")
