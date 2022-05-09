@@ -107,3 +107,12 @@ Essa missão confirmou o funcionamento da primeira versão do projeto MKSENSE.
   <img style="background-color:#FFFFFF" src="https://github.com/DIEGOVZK/MKSENSE/blob/main/media/TinySat%20V1.jpeg" width="49%">
   <img style="background-color:#FFFFFF" src="https://github.com/DIEGOVZK/MKSENSE/blob/main/media/gp%20TinySat%20V1.jpeg" width="49%">
 </p>
+
+
+### 🛰 OBSAT - Priceless Brains / AlphaSat
+O projeto MKSENSE foi utilizado para os testes dos CubeSats atualmente competindo na 1ª OBSAT. Os times Priceless Brains e AlphaSat construíram um sistema de telemetria para o satelite, que envia os dados por uma rede IoT a um servidor local MKSENSE, que gerencia os dados sensoriais coletados e os armazena em um banco de dados. Depois são gerados gráficos dos dados, que podem ser analizados para tirar conclusões das missões e para documentação do projeto, que comprova o funcionamento conforme especificado pela organização.
+
+<p float="left">
+  <img style="background-color:#FFFFFF" src="https://github.com/DIEGOVZK/MKSENSE/blob/main/media/cubesatAlphasat.jpg" width="49%">
+  <img style="background-color:#FFFFFF" src="https://github.com/DIEGOVZK/MKSENSE/blob/main/media/cubesatSolaris.jpg" width="49%">
+</p>
