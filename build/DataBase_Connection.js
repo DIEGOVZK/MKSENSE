@@ -30,6 +30,14 @@ class DataBase_Connection {
                 this.ui.mostrarStatus(host, database);
         });
     }
+    executarQuery(query) {
+        this.connection.query(query, (err, result) => {
+            if (err) {
+                throw err;
+            }
+            return result;
+        });
+    }
     desconectar() {
         this.connection.end();
     }
