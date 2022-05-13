@@ -20,5 +20,8 @@ class FileSystem {
             }
         });
     }
+    lerArquivo() {
+        return fs_1.default.readFileSync("./serverConfig.txt", 'utf-8');
+    }
 }
 exports.default = FileSystem;
