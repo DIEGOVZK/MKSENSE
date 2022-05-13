@@ -1,4 +1,5 @@
 // Inclui as dependências > fs
+import { throws } from 'assert';
 import fs from 'fs';
 
 // Definição da classe FileSystem
@@ -33,5 +34,13 @@ export default class FileSystem {
                         porta + " Erro: " + err + "\n");
                 }
             });
+    }
+
+    // Método para leitura de dados de um arquivo "serverConfig.txt"
+    lerArquivo() : string | any {
+
+        // Lê os dados do arquivo "serverConfig.txt" de maneira síncrona
+        return fs.readFileSync("./serverConfig.txt", 'utf-8')
+
     }
 }

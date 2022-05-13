@@ -4,5 +4,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const LocalServer_1 = __importDefault(require("./LocalServer"));
-const localServer3 = new LocalServer_1.default(80);
-localServer3.iniciarServidor();
+const FileSystem_1 = __importDefault(require("./FileSystem"));
+let localServerList = [];
+const fs = FileSystem_1.default.getInstance();
+var lines = String(fs.lerArquivo()).split(",");
+lines[0].split(" ").forEach(element => {
+    localServerList.push(new LocalServer_1.default(parseInt(element)));
+});
+localServerList.forEach(element => {
+    element.iniciarServidor();
+});
