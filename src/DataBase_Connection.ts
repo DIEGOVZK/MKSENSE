@@ -74,11 +74,12 @@ export default class DataBase_Connection {
                     }
                     else {
     
-                        console.log(results);
+                        // Mostra status via UI_DataBase
+                        this.ui.mostrarStatus(results, this.connection.config.database);
+                        console.timeLog(results);
                         
                         // Resolve a promessa
                         resolve(results);
-                        
                     }
                 });
             });
@@ -89,6 +90,5 @@ export default class DataBase_Connection {
 
         // Fecha conexão com o servidor MySQL
         this.connection.end();
-
     }
 }

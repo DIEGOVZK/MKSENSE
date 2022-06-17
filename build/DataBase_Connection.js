@@ -48,7 +48,8 @@ class DataBase_Connection {
                     reject(err);
                 }
                 else {
-                    console.log(results);
+                    this.ui.mostrarStatus(results, this.connection.config.database);
+                    console.timeLog(results);
                     resolve(results);
                 }
             }));

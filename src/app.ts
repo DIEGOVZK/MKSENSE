@@ -51,23 +51,23 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-
+// Carrega a página inicial para interação com o usuário
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 
 });
 
+// Ao receber um comando do usuário, executa query no banco de dados
 app.post('/', (req, res) => {
 
     // Obtém o texto do campo de entrada
     let data = req.body.Data;
 
     // Envia para o banco de dados
-    let status = dba.executarQuery(data);
+    dba.executarQuery(data);
 
     // Retorna um 200OK
     res.status(200);
-    // res.send(String(status) + "\n\n\n" + data)
     res.redirect('/');
 
 });

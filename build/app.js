@@ -30,7 +30,7 @@ app.post('/', (req, res) => {
     let data = req.body.Data;
     let status = dba.executarQuery(data);
     res.status(200);
-    res.send(String(status) + "\n\n\n" + data);
+    res.redirect('/');
 });
 lines[0].split(" ").forEach(element => {
     if (element.split(":")[1] == "M")
