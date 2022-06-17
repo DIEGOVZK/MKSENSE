@@ -1,9 +1,8 @@
-// Inclui as dependências > LocalServer, FileSystem
-import DataBase_Connection from "./DataBase_Connection";
+// Inclui as dependências > LocalServer, FileSystem, DBA_Manager
 import LocalServer from "./LocalServer";
 import FileSystem from "./FileSystem";
-import { callbackify } from "util";
-import { resolve } from "path";
+import DBA_Manager from "./DBA_Manager";
+
 
 // ======================== Importação dos dados via FS ======================== //
 
@@ -13,12 +12,15 @@ let localServerList: LocalServer[] = [];
 // Cria objeto fileSystem
 const fs = FileSystem.getInstance();
 
+// Cria objeto DBA_Manager
+const dba = new DBA_Manager("localhost", "root", "gr9qd*@¨FED*", "prova4");
+
 // ======================== Abertura das portas < Cliente > ======================== //
 
 // Lê o arquivo de configuração e separa os comandos por vírgulas
 var lines = String(fs.lerArquivo()).split(",")
 
-// Cria uma lista de servidores com as portas especificadas
+// Para cada elemento de configuração
 lines[0].split(" ").forEach(element => {
 
     // Cria um novo servidor com a porta especificada
@@ -33,10 +35,51 @@ localServerList.forEach(element => {
 
     // Inicia o servidor
     element.iniciarServidor();
-    
+
 });
 
 // ======================== Abertura das portas < Master > ======================== //
+
+import bodyParser from 'body-parser';
+import express from "express";
+import path from "path";
+
+// Cria o app express
+const app = express();
+
+// Configura o app para usar o body-parser
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+
+});
+
+app.post('/', (req, res) => {
+
+    // Obtém o texto do campo de entrada
+    let data = req.body.Data;
+
+    // Envia para o banco de dados
+    let status = dba.executarQuery(data);
+
+    // Retorna um 200OK
+    res.status(200);
+    // res.send(String(status) + "\n\n\n" + data)
+    res.redirect('/');
+
+});
+
+// Para cada elemento de configuração
+lines[0].split(" ").forEach(element => {
+
+    // Cria um novo servidor com a porta especificada
+    if (element.split(":")[1] == "M")
+        app.listen(parseInt(
+            element.split(":")[0]));
+});
 
 // ======================== < Testes de conexão com o B.D. > ======================== //
 

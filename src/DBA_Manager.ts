@@ -1,22 +1,32 @@
 // Dependências - DBA, UI_DataBase
 import UI_DataBase from './UI_DataBase';
-import DBA from './DBA';
+import DB from './DataBase_Connection';
 
 
-// Definição da classe DBA_Manager que herda da classe DBA
-export default class DBA_Manager extends DBA {
+// Definição da classe DBA_Manager
+export default class DBA_Manager {
 
     // Importa a classe UI_DataBase
     private ui: UI_DataBase = new UI_DataBase();
 
+    // Membros da classe
+    private connection: DB | any;
+    private localhost: string;
+    private database: string;
+    private password: string;
+    private user: string;
+
     // Construtor da classe DBA_Manager
     constructor(localhost: string, user: string, password: string, database: string) {
 
-        // Chama o construtor da classe DBA
-        super(localhost, user, password, database);
+        // Cria o objeto de conexão
+        this.connection = DB.getInstance();
 
         // Inicializa a tabela
         this.database = database;
+        this.localhost = localhost;
+        this.password = password;
+        this.user = user;
 
     }
 
@@ -25,26 +35,18 @@ export default class DBA_Manager extends DBA {
     executarQuery(query: string) {
 
         // Verifica se a query não segue o padrão de comandos
-        if (query.toUpperCase().includes('SELECT') || 
-            query.toUpperCase().includes('INSERT') || 
-            query.toUpperCase().includes('UPDATE') || 
-            query.toUpperCase().includes('DELETE')) {  }
-        
+        if (query.toUpperCase().includes('SELECT') ||
+            query.toUpperCase().includes('INSERT') ||
+            query.toUpperCase().includes('UPDATE') ||
+            query.toUpperCase().includes('DELETE')) {
+
+            // Executa a query
+            this.connection.conectar(this.localhost, this.user, this.password, this.database);
+            this.connection.executarQuery(query);
+            this.connection.desconectar();
+        }
+
         // Caso contrário, mostra mensagem de erro
         else { this.ui.mostrarErro('Query inválida!', this.database); }
-
-        // Executa a query
-        this.connection.query(query, (err: any, result: any) => {
-            
-            // Verifica se ocorreu erro
-            if (err) { this.ui.mostrarErro(err, this.database); }
-
-            // Mostra mensagem de sucesso
-            this.ui.mostrarStatus('Comando executado', this.database);
-
-            // Retorna o resultado da query
-            return result;
-
-        });
     }
 }
