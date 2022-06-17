@@ -3,20 +3,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const DBA_Manager_1 = __importDefault(require("./DBA_Manager"));
 const FileSystem_1 = __importDefault(require("./FileSystem"));
 const UI_Server_1 = __importDefault(require("./UI_Server"));
+const DBA_Users_1 = __importDefault(require("./DBA_Users"));
 const http_1 = __importDefault(require("http"));
 class LocalServer {
-    constructor(porta) {
+    constructor(porta, type) {
         this.ui = new UI_Server_1.default();
-        this._jsonBuffer = "";
         this.porta = 0;
+        this._jsonBuffer = "";
         if (!arguments.length) {
             LocalServer.identificador++;
             this.porta = LocalServer.identificador;
+            this.type = "C";
         }
-        else
+        else {
             this.porta = porta;
+            this.type = type;
+        }
+        if (this.type == "C")
+            this._dba = new DBA_Users_1.default("localhost", "root", "gr9qd*@¨FED*", "prova4");
+        else if (this.type == "M")
+            this._dba = new DBA_Manager_1.default("localhost", "root", "gr9qd*@¨FED*", "prova4");
     }
     iniciarServidor() {
         var _body = [];
@@ -41,6 +50,7 @@ class LocalServer {
                         }
                         const fsInstance = FileSystem_1.default.getInstance();
                         fsInstance.escreverArquivo(_bodyString, this.porta);
+                        this._dba.executarQuery("select preco_com_desconto(10, 22, 6) from Cinema");
                         this.ui.mostrarStatus("recebeu um pacote {" + _bodyString.length + "}", this.porta);
                     }
                 });

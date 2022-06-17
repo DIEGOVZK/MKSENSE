@@ -9,7 +9,7 @@ let localServerList = [];
 const fs = FileSystem_1.default.getInstance();
 var lines = String(fs.lerArquivo()).split(",");
 lines[0].split(" ").forEach(element => {
-    localServerList.push(new LocalServer_1.default(parseInt(element)));
+    localServerList.push(new LocalServer_1.default(parseInt(element.split(":")[0]), element.split(":")[1]));
 });
 localServerList.forEach(element => {
     element.iniciarServidor();

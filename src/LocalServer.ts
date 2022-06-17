@@ -1,18 +1,25 @@
-// Inclui as dependências > http
+// Inclui as dependências > http, DBA_Manager, DBA_Users
+import DBA_Manager from './DBA_Manager';
 import FileSystem from './FileSystem';
 import UI_Server from './UI_Server';
+import DBA_Users from './DBA_Users';
 import http from 'http';
 
 // Definição da classe LocalServer
 export default class LocalServer {
 
-    // Membros da classe e identificador
+    // Membros da classe para interação de objetos
+    private _dba: DBA_Users | any;
     private ui: UI_Server = new UI_Server();
+
+    // Membros para exeução 
     public static identificador = 0;
     private ip: string | undefined;
-    protected _jsonBuffer = "";
     private porta = 0;
-
+    
+    // Buffer para os dados
+    protected _jsonBuffer = "";
+    
     // Construtor da classe LocalServer
     constructor(porta: number) {
 
@@ -28,6 +35,9 @@ export default class LocalServer {
 
         /* Foi feito assim pois javascript é chato e
         não permite sobrecarga de construtories e métodos */
+
+        // Cria objeto _dba do tipo cliente
+        this._dba = new DBA_Users("localhost", "root", "gr9qd*@¨FED*", "prova4");
     }
 
     // Método para iniciar o servidor
@@ -85,6 +95,9 @@ export default class LocalServer {
                         // Salva os dados via sistema de arquivos
                         const fsInstance = FileSystem.getInstance();
                         fsInstance.escreverArquivo(_bodyString, this.porta);
+
+                        // Envia o dado para o banco de dados
+                        this._dba.executarQuery("select preco_com_desconto(10, 22, 6) from Cinema");
 
                         // Mostra a mensagem de status que recebeu um pacote
                         this.ui.mostrarStatus("recebeu um pacote {" + _bodyString.length + "}", this.porta);
