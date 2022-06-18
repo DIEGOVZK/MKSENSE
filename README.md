@@ -7,7 +7,6 @@ MKSENSE é um sistema de gerenciamento IoT para telemetria remota de dados senso
 MKSENSE
 │   EXECUTE JS FILE - START SERVER.bat 
 │   BUILD JS FILE FROM TS FILE.bat 
-│   MKSENSE.drawio.png
 │   package-lock.json
 │   serverConfig.txt
 │   tsconfig.json
@@ -15,6 +14,9 @@ MKSENSE
 │   Grapher.py
 │   README.md
 │   LICENCE
+│   
+└─── database
+│   │   projeto.sql
 │   
 └─── src
 │   │   DataBase_Connection.ts
@@ -60,6 +62,9 @@ Na reaiz do projeto foram criados os arquivos de execução e compilação .bat 
 
 ### [src](https://github.com/DIEGOVZK/MKSENSE/tree/main/src)
 Arquivo onde todas as classes e funções do projeto são escritas. Todos os arquivos tem a extensão de TypeScript.
+
+### [database](https://github.com/DIEGOVZK/MKSENSE/tree/main/database)
+Aqui está o banco de dados do projeto. O banco de dados é um arquivo projeto.sql, utilizado em mySQL, que é um banco de dados relacional.
 
 ### [build](https://github.com/DIEGOVZK/MKSENSE/tree/main/build)
 Para executar os arquivos escritos em typescript, é necessário compilar os arquivos para JavaScript, para isso utiliza-se os comandos de console salvos no arquivo .bat, que compila os arquivos e os salva na pasta build.
