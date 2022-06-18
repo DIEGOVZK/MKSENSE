@@ -16,12 +16,13 @@ create table Sensor (
 -- cria uma tabela Cliente com nome, login (chave), senha, contato e Sensor_id_cliente (chave estrangeira para tabeka de rekalçai N:M)
 drop table if exists Cliente;
 create table Cliente (
+    id int not null auto_increment,
     nome varchar(50) not null,
     login varchar(50) not null,
     senha varchar(50) not null,
     contato varchar(50) not null,
     Sensor_id_cliente int,
-    primary key (login)
+    primary key (id)
 );
 
 -- Cria uma tabela Instalador com ID (chave), nome, CPF, salário
@@ -41,7 +42,7 @@ create table Instalador_Cliente (
     id_cliente int not null,
     primary key (id_instalador, id_cliente),
     foreign key (id_instalador) references Instalador(id),
-    foreign key (id_cliente) references Cliente(login)
+    foreign key (id_cliente) references Cliente(id)
 );
 
 -- Cria uma stored proceadure para inserir um novo dado de sensor
@@ -58,18 +59,3 @@ create procedure inserir_dado_sensor(
     insert into Sensor (dado, tipo, id_usuario) values (dado, tipo, id_usuario);
 END $$ 
 DELIMITER ;
-
--- Popula a tabela Sensor com dados aleatórios
-use `DiegoAC`;
-call inserir_dado_sensor(1, 'temp', 1);
-call inserir_dado_sensor(2, 'temp', 1);
-call inserir_dado_sensor(3, 'temp', 1);
-call inserir_dado_sensor(4, 'temp', 1);
-call inserir_dado_sensor(5, 'temp', 2);
-call inserir_dado_sensor(6, 'temp', 2);
-call inserir_dado_sensor(7, 'temp', 2);
-call inserir_dado_sensor(8, 'temp', 2);
-call inserir_dado_sensor(9, 'temp', 2);
-
--- Seleciona apenas as empresas cujos sensores indicam temperatura maior que 5
-select * from Cliente where Sensor_id_cliente in (select id from Sensor where dado > 5);
