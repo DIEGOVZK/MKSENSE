@@ -1,5 +1,5 @@
 // Dependências - mysql
-import mysql from 'mysql';
+import mysql from 'mysql2';
 import UI_DataBase from './UI_DataBase';
 
 // Definição da classe DataBase_Connection para conexão com D.B.
@@ -33,7 +33,7 @@ export default class DataBase_Connection {
     }
 
     // Método para conectar ao servidor MySQL e verifica a conexão
-    conectar(host: string, user: string, password: string, database: string) {
+    async conectar(host: string, user: string, password: string, database: string) {
 
         // Conecta com o servidor MySQL na rede local
         this.connection = mysql.createConnection({
@@ -44,7 +44,7 @@ export default class DataBase_Connection {
         });
 
         // Verifica se a conexão foi estabelecida
-        this.connection.connect((err: any) => {
+        await this.connection.connect((err: any) => {
             if (err) {
 
                 // Mostra mensagem de erro via UI_DataBase
@@ -58,19 +58,31 @@ export default class DataBase_Connection {
     }
 
     // Método para executar uma query no banco de dados
-    executarQuery(query: string) {
+    executarQuery(query: string) : any {
 
-        // Executa a query
-        this.connection.query(query, (err: any, result: any) => {
-            
-            // Em caso de erro trows um erro
-            if (err) { throw err; }
-
-            // Em caso de sucesso, retorna o resultado
-            return result;
+        // Executa a query e retorna promessa do resultado
+        return new Promise((resolve, reject) => {
                 
-        });
+                // Executa a query
+                this.connection.query(query, async (err: any, results: any) => {
+    
+                    // Verifica se ocorreu erro
+                    if (err) {
 
+                        // Rejeita a promessa
+                        reject(err);
+                    }
+                    else {
+    
+                        // Mostra status via UI_DataBase
+                        this.ui.mostrarStatus(results, this.connection.config.database);
+                        console.timeLog(results);
+                        
+                        // Resolve a promessa
+                        resolve(results);
+                    }
+                });
+            });
     }
 
     // Método para desconectar do servidor MySQL
@@ -78,6 +90,5 @@ export default class DataBase_Connection {
 
         // Fecha conexão com o servidor MySQL
         this.connection.end();
-
     }
 }
