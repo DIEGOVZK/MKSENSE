@@ -8,7 +8,7 @@ const FileSystem_1 = __importDefault(require("./FileSystem"));
 const DBA_Manager_1 = __importDefault(require("./DBA_Manager"));
 let localServerList = [];
 const fs = FileSystem_1.default.getInstance();
-const dba = new DBA_Manager_1.default("localhost", "root", "gr9qd*@¨FED*", "prova4");
+const dba = new DBA_Manager_1.default("localhost", "root", "gr9qd*@¨FED*", "DiegoAC");
 var lines = String(fs.lerArquivo()).split(",");
 lines[0].split(" ").forEach(element => {
     if (element.split(":")[1] == "C")
@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 });
 app.post('/', (req, res) => {
     let data = req.body.Data;
-    let status = dba.executarQuery(data);
+    dba.executarQuery(data);
     res.status(200);
     res.redirect('/');
 });

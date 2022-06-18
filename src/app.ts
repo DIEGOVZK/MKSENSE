@@ -13,7 +13,7 @@ let localServerList: LocalServer[] = [];
 const fs = FileSystem.getInstance();
 
 // Cria objeto DBA_Manager
-const dba = new DBA_Manager("localhost", "root", "gr9qd*@¨FED*", "prova4");
+const dba = new DBA_Manager("localhost", "root", "gr9qd*@¨FED*", "DiegoAC");
 
 // ======================== Abertura das portas < Cliente > ======================== //
 

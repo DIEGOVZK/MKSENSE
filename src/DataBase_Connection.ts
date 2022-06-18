@@ -76,7 +76,7 @@ export default class DataBase_Connection {
     
                         // Mostra status via UI_DataBase
                         this.ui.mostrarStatus(results, this.connection.config.database);
-                        console.timeLog(results);
+                        console.log(results);
                         
                         // Resolve a promessa
                         resolve(results);

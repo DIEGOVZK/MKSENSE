@@ -49,7 +49,7 @@ class DataBase_Connection {
                 }
                 else {
                     this.ui.mostrarStatus(results, this.connection.config.database);
-                    console.timeLog(results);
+                    console.log(results);
                     resolve(results);
                 }
             }));
